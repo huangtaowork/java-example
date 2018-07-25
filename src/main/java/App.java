@@ -3,11 +3,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class App {
 
     public static void main(String[] args) throws Exception{
-        drawFont();
+        //drawFont();
+        test();
     }
 
     private static void drawFont() throws Exception{
@@ -36,8 +40,6 @@ public class App {
         ImageIO.write(image, "png", new File("/Users/taohuang/Downloads/poster.png"));
     }
 
-
-
     private static Font getFont(float fontSize) throws Exception{
         Font font = null;
         String url = "/Users/taohuang/Downloads/simsun.ttc";
@@ -47,5 +49,29 @@ public class App {
             font = tempFont.deriveFont(fontSize);
         }
         return font;
+    }
+
+
+    private static void test(){
+        InputStream is = null;
+        String path = "http://wechatwork.dmhub.cn/referplan/poster/0f15c5edbf6a4f08a83e86cada13c21e?x_tenant_id=26";
+        try{
+            URL url = new URL(path);
+            URLConnection con = url.openConnection();
+            con.setConnectTimeout(6000);
+            con.setReadTimeout(6000);
+            is = con.getInputStream();
+            BufferedImage image = ImageIO.read(is);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            try{
+                if(is != null){
+                    is.close();
+                }
+            }catch (Exception e){
+
+            }
+        }
     }
 }
