@@ -22,10 +22,9 @@ repositories {
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile 'com.google.guava:guava:21.0'
-
     compile "net.glxn.qrgen:javase:2.0"
-
-    // Use JUnit test framework
+    compile "redis.clients:jedis:2.9.0"
+    // Use JUnit test
     testCompile 'junit:junit:4.12'
 }
 
